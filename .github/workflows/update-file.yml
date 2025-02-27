@@ -1,0 +1,37 @@
+name: Update TXT file from Lenovo feed
+
+on:
+  # Run daily at 11:00 PM UTC (which is 8:00 AM KST)
+  schedule:
+    - cron: '0 23 * * *'
+  # Allows manual triggering of the workflow
+  workflow_dispatch:
+
+jobs:
+  update-file:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Step A: Check out the repository so we can modify it
+      - name: Check out repo
+        uses: actions/checkout@v3
+        
+      # Step B: Download the latest TXT from the Lenovo feed
+      - name: Download new file
+        run: |
+          curl -o test_file.txt https://global-dgfeeds.lenovo.com/dealspages/DGFEEDS/Web_ep_naver_2024_Lenovo_ko_KR.txt
+
+      # Step C: Commit and push changes if there are any updates
+      - name: Commit changes
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add test_file.txt
+          
+          # Only commit if there are changes
+          if ! git diff --cached --quiet; then
+            git commit -m "Update test_file.txt from Lenovo feed"
+            git push
+          else
+            echo "No changes to commit."
+          fi
