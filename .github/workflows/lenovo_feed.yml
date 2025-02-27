@@ -18,7 +18,7 @@ jobs:
 
       - name: Copy new file from local path
         run: |
-          copy "C:\Users\Aravind.kumar\Documents\Batch files\LENOVO\lenovo_kr_mandatory_test.tsv" test_file.txt
+          copy "C:\Users\Aravind.kumar\Documents\Batch files\LENOVO\lenovo_kr_mandatory_test" test_file.txt
         shell: cmd
 
       - name: Commit changes
