@@ -1,38 +1,27 @@
-name: Update TSV file from local LENOVO feed
+name: Add TSV File
 
 on:
-  schedule:
-    - cron: '5 23 * * *'   # Runs daily at 11:05 PM UTC / 8:05 AM KST
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 jobs:
-  update-file:
-    runs-on: [self-hosted, windows]  # This job must run on a self-hosted Windows runner
-
+  add-tsv-file:
+    runs-on: windows-latest  # Use a self-hosted runner if needed where the file exists
     steps:
-      - name: Check out repo
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Copy new file from local path
+      - name: Copy TSV file to repository directory
         run: |
-          copy "C:\Users\Aravind.kumar\Documents\Batch files\LENOVO\lenovo_kr_mandatory_test" test_file.txt
-        shell: cmd
+          REM Copy the file from the absolute path to the current workspace folder
+          copy "C:\Users\Aravind.kumar\Documents\Batch files\LENOVO\lenovo_kr_mandatory_test.tsv" "%GITHUB_WORKSPACE%\"
 
-      - name: Commit changes
-        shell: pwsh
+      - name: Configure Git
         run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git add test_file.txt
-          
-          # Check if there are any changes to commit
-          git diff --cached --quiet
-          if ($LASTEXITCODE -ne 0) {
-            git commit -m "Update test_file.txt from local LENOVO feed"
-            git push
-          } else {
-            Write-Host "No changes to commit."
-          }
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit and push TSV file
+        run: |
+          git add lenovo_kr_mandatory_test.tsv
+          git commit -m "Add lenovo_kr_mandatory_test.tsv file"
+          git push origin main
