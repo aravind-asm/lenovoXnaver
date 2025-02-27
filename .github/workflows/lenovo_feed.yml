@@ -13,7 +13,7 @@ jobs:
       - name: Copy TSV file to repository directory
         run: |
           # Copy the file from the absolute path to the current workspace folder
-          Copy-Item "C:\Users\Aravind.kumar\Documents\Batch_files\LENOVO\lenovo_kr_mandatory_test" "$env:GITHUB_WORKSPACE\"
+          Copy-Item "C:\Users\Aravind.kumar\Documents\Batch_files\LENOVO\lenovo_kr_mandatory_test.tsv" "$env:GITHUB_WORKSPACE\"
 
       - name: Configure Git
         run: |
