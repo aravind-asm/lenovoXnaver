@@ -5,15 +5,15 @@ on:
 
 jobs:
   add-tsv-file:
-    runs-on: windows-latest  # Use a self-hosted runner if needed where the file exists
+    runs-on: windows-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
       - name: Copy TSV file to repository directory
         run: |
-          REM Copy the file from the absolute path to the current workspace folder
-          copy "C:\Users\Aravind.kumar\Documents\Batch files\LENOVO\lenovo_kr_mandatory_test.tsv" "%GITHUB_WORKSPACE%\"
+          # Copy the file from the absolute path to the current workspace folder
+          Copy-Item "C:\Users\Aravind.kumar\Documents\Batch files\LENOVO\lenovo_kr_mandatory_test.tsv" "$env:GITHUB_WORKSPACE\"
 
       - name: Configure Git
         run: |
