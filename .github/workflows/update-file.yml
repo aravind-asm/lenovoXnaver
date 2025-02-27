@@ -1,13 +1,12 @@
-name: Update TXT file from Lenovo feed
+name: Update TSV file from Lenovo feed
 
 on:
-  # Runs daily at 11:05 UTC
   schedule:
-    - cron: '5 23 * * *'
+    - cron: '5 23 * * *'   # Runs daily at 11:05 UTC
   workflow_dispatch:
 
 permissions:
-  contents: write  # <-- Allows GitHub Actions to push changes
+  contents: write
 
 jobs:
   update-file:
@@ -19,7 +18,11 @@ jobs:
         
       - name: Download new file
         run: |
-          curl -o test_file.txt https://luezen5ed3.execute-api.eu-west-1.amazonaws.com/datasets-https/lenovo/301257/lenovo_kr_mandatory_test.tsv
+          # Use the -u (user) flag for HTTP Basic Auth
+          # This references the GitHub Secrets for username and password
+          curl -u "${{ secrets.FEED_USERNAME }}:${{ secrets.FEED_PASSWORD }}" \
+               -o test_file.txt \
+               https://luezen5ed3.execute-api.eu-west-1.amazonaws.com/datasets-https/lenovo/301257/lenovo_kr_mandatory_test.tsv
 
       - name: Commit changes
         run: |
@@ -33,4 +36,3 @@ jobs:
           else
             echo "No changes to commit."
           fi
-
