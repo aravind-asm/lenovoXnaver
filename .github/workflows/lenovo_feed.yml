@@ -17,10 +17,10 @@ jobs:
       - name: Copy TSV file to repository directory
         run: |
           # Ensure the file exists before copying
-          if (Test-Path "C:\Users\Aravind.kumar\Documents\Batch_files\LENOVO\lenovo_kr_mandatory_test.tsv") {
-              Copy-Item "C:\Users\Aravind.kumar\Documents\Batch_files\LENOVO\lenovo_kr_mandatory_test.tsv" "$env:GITHUB_WORKSPACE\"
+          if (Test-Path "C:\Users\Aravind.kumar\Documents\Git\LENOVO\lenovo_kr_mandatory_test.tsv") {
+              Copy-Item "C:\Users\Aravind.kumar\Documents\Git\LENOVO\lenovo_kr_mandatory_test.tsv" "$env:GITHUB_WORKSPACE\"
           } else {
-              Write-Error "File not found: C:\Users\Aravind.kumar\Documents\Batch_files\LENOVO\lenovo_kr_mandatory_test.tsv"
+              Write-Error "File not found: C:\Users\Aravind.kumar\Documents\Git\LENOVO\lenovo_kr_mandatory_test.tsv"
           }
 
       - name: Configure Git
