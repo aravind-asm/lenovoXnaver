@@ -18,11 +18,10 @@ jobs:
         
       - name: Download new file
         run: |
-          # Use the -u (user) flag for HTTP Basic Auth
-          # This references the GitHub Secrets for username and password
-          curl -u "${{ secrets.FEED_USERNAME }}:${{ secrets.FEED_PASSWORD }}" \
+          curl -v -u "${{ secrets.FEED_USERNAME }}:${{ secrets.FEED_PASSWORD }}" \
+               -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64)" \
                -o test_file.txt \
-               https://luezen5ed3.execute-api.eu-west-1.amazonaws.com/datasets-https/lenovo/301257/lenovo_kr_mandatory_test.tsv
+               "https://luezen5ed3.execute-api.eu-west-1.amazonaws.com/datasets-https/lenovo/301257/lenovo_kr_mandatory_test.tsv"
 
       - name: Commit changes
         run: |
