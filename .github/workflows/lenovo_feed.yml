@@ -12,7 +12,7 @@ jobs:
 
       - name: List LENOVO Directory Contents
         run: |
-          Get-ChildItem "C:\Users\Aravind.kumar\Documents\Batch_files\LENOVO"
+          Get-ChildItem "C:\Users\Aravind.kumar\Documents\Git\LENOVO"
       
       - name: Copy TSV file to repository directory
         run: |
