@@ -1,12 +1,13 @@
 name: Update TXT file from Lenovo feed
 
 on:
+  # Runs daily at 11:05 UTC
   schedule:
-    - cron: '0 23 * * *'
+    - cron: '5 23 * * *'
   workflow_dispatch:
 
 permissions:
-  contents: write  # <-- This line is critical
+  contents: write  # <-- Allows GitHub Actions to push changes
 
 jobs:
   update-file:
@@ -32,3 +33,4 @@ jobs:
           else
             echo "No changes to commit."
           fi
+
