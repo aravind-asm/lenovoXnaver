@@ -5,15 +5,23 @@ on:
 
 jobs:
   add-tsv-file:
-    runs-on: windows-latest
+    runs-on: self-hosted  # Ensure your self-hosted runner is used
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
+      - name: List LENOVO Directory Contents
+        run: |
+          Get-ChildItem "C:\Users\Aravind.kumar\Documents\Batch_files\LENOVO"
+      
       - name: Copy TSV file to repository directory
         run: |
-          # Copy the file from the absolute path to the current workspace folder
-          Copy-Item "C:\Users\Aravind.kumar\Documents\Batch_files\LENOVO\lenovo_kr_mandatory_test.tsv" "$env:GITHUB_WORKSPACE\"
+          # Ensure the file exists before copying
+          if (Test-Path "C:\Users\Aravind.kumar\Documents\Batch_files\LENOVO\lenovo_kr_mandatory_test.tsv") {
+              Copy-Item "C:\Users\Aravind.kumar\Documents\Batch_files\LENOVO\lenovo_kr_mandatory_test.tsv" "$env:GITHUB_WORKSPACE\"
+          } else {
+              Write-Error "File not found: C:\Users\Aravind.kumar\Documents\Batch_files\LENOVO\lenovo_kr_mandatory_test.tsv"
+          }
 
       - name: Configure Git
         run: |
