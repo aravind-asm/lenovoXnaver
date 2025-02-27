@@ -2,7 +2,7 @@ name: Update TSV file from local LENOVO feed
 
 on:
   schedule:
-    - cron: '5 11 * * *'   # Runs daily at 11:05 UTC
+    - cron: '5 23 * * *'   # Runs daily at 11:05 UTC
   workflow_dispatch:
 
 permissions:
