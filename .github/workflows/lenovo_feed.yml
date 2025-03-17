@@ -3,7 +3,7 @@ name: Add TSV File
 on:
   workflow_dispatch:
   schedule:
-    #- cron: '5 23 * * *'  # Runs daily at 11:05 PM UTC
+    - cron: '5 23 * * *'  # Runs daily at 11:05 PM UTC
 
 jobs:
   add-tsv-file:
